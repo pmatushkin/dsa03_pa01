@@ -4,7 +4,26 @@ import java.util.Scanner;
 public class Reachability {
     private static int reach(ArrayList<Integer>[] adj, int x, int y) {
         //write your code here
-        return 0;
+        int[] v = new int[adj.length];
+        explore(adj, v, x);
+
+        return v[x] * v[y];
+    }
+
+    private static void explore(ArrayList<Integer>[] adj, int[] v, int x) {
+        // mark the current vertex as visited
+        v[x] = 1;
+
+        // get the list of edges connected to the current vertex
+        ArrayList<Integer> edges = adj[x];
+
+        // for every edge connected to the current vertex
+        for (int e : edges) {
+            // begin exploring starting from the next vertex
+            if (v[e] != 1) {
+                explore(adj, v, e);
+            }
+        }
     }
 
 
